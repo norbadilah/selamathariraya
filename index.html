@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Hari Raya — Wan NorBadilah</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F5E07A;
+    --gold-dark: #A0820D;
+    --emerald: #1a6b3c;
+    --emerald-light: #2d9a5a;
+    --deep: #0a1a0f;
+    --cream: #FDF6E3;
+    --crimson: #8B1A1A;
+    --sand: #D4AF37;
+    --sand-light: #F5E07A;
+    --sand-deep: #A0820D;
+    --terracotta: #D4AF37;
+    --terracotta-light: #F5E07A;
+    --terracotta-pale: rgba(212,175,55,0.15);
+    --sage: #1a6b3c;
+    --sage-light: #2d9a5a;
+    --sage-pale: rgba(26,107,60,0.15);
+    --warm-gold: #D4AF37;
+    --warm-gold-light: #F5E07A;
+    --warm-gold-pale: rgba(212,175,55,0.2);
+    --rose: #8B1A1A;
+    --rose-pale: rgba(139,26,26,0.15);
+    --parchment: rgba(26,107,60,0.25);
+    --ink: #FDF6E3;
+    --ink-mid: #F5E07A;
+    --ink-soft: rgba(253,246,227,0.65);
+    --shadow: rgba(212,175,55,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--deep);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+    color: var(--cream);
+  }
+
+  /* ── Cursor ── */
+  .cursor { width:18px; height:18px; border:1.5px solid var(--gold); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:all .1s ease; }
+  .cursor-dot { width:5px; height:5px; background:var(--gold); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+
+  /* ── Background texture ── */
+  .bg-texture { position:fixed; inset:0; z-index:0; pointer-events:none; background: linear-gradient(160deg, #0a1a0f 0%, #0f2418 35%, #0a1a0f 65%, #071410 100%); }
+  .bg-texture::after { content:''; position:absolute; inset:0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='38' fill='none' stroke='rgba(212,175,55,0.06)' stroke-width='0.8'/%3E%3Cpath d='M40 2 L78 40 L40 78 L2 40 Z' fill='none' stroke='rgba(212,175,55,0.04)' stroke-width='0.8'/%3E%3C/svg%3E"); }
+
+  /* ── Canvas layers ── */
+  #petals-canvas { position:fixed; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+  #fireworks-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:10; }
+
+  /* ── Bunting ── */
+  .bunting-svg { position:fixed; top:0; width:100%; height:110px; z-index:3; pointer-events:none; }
+
+  /* ── Lanterns ── */
+  .lanterns-row { position:fixed; top:0; width:100%; display:flex; justify-content:center; gap:55px; z-index:3; pointer-events:none; }
+  .lantern-wrap { display:flex; flex-direction:column; align-items:center; }
+  .lantern-string { width:1.5px; height:55px; background:linear-gradient(to bottom, rgba(196,152,58,0.5), transparent); }
+  .lantern { width:34px; height:48px; border-radius:50% 50% 42% 42%; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 0 20px 8px var(--glow, rgba(196,152,58,0.3)); animation:swing 3.5s ease-in-out infinite; }
+  .lantern::before { content:''; position:absolute; width:100%; height:100%; border-radius:inherit; background:inherit; filter:blur(6px); opacity:.4; z-index:-1; }
+  .lantern-cap { position:absolute; top:-6px; width:120%; height:9px; background:var(--warm-gold); border-radius:5px 5px 0 0; opacity:.8; }
+  .lantern-bottom { position:absolute; bottom:-6px; width:120%; height:9px; background:var(--warm-gold); border-radius:0 0 5px 5px; opacity:.8; }
+  .lantern-tassel { position:absolute; bottom:-18px; width:2px; height:14px; background:var(--warm-gold); border-radius:0 0 2px 2px; }
+  @keyframes swing { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
+
+  /* ── Floating decorations ── */
+  .float-deco { position:fixed; pointer-events:none; z-index:2; animation:floatDeco ease-in-out infinite; }
+  @keyframes floatDeco { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-16px) rotate(10deg)} }
+
+  /* ── Moon ── */
+  .moon-orb { position:fixed; top:70px; right:7%; width:60px; height:60px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fffde0, #f5e07a 40%, #d4af37 70%, #a0820d); z-index:2; pointer-events:none; animation:moonFloat 7s ease-in-out infinite, moonGlow 4s ease-in-out infinite alternate; }
+  @keyframes moonFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  @keyframes moonGlow { from{box-shadow:0 0 40px 15px rgba(212,175,55,0.2), 0 0 80px 30px rgba(212,175,55,0.08)} to{box-shadow:0 0 60px 25px rgba(212,175,55,0.4), 0 0 120px 50px rgba(212,175,55,0.15)} }
+  .moon-orb::after { content:''; position:absolute; top:4px; right:7px; width:46px; height:46px; border-radius:50%; background:var(--deep); }
+
+  /* ── Mosque silhouette ── */
+  .mosque-silhouette { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:.18; z-index:0; pointer-events:none; }
+
+  /* ── Scene ── */
+  .scene { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; z-index:4; overflow:hidden; }
+
+  /* ── Hero ── */
+  .hero { padding:120px 20px 50px; text-align:center; position:relative; z-index:4; animation:fadeInUp 1.2s ease both; }
+  .arabic-text { font-family:'Amiri', serif; font-size:clamp(28px,5.5vw,60px); color:var(--warm-gold); line-height:1.3; animation:subtleGlow 3s ease-in-out infinite alternate; }
+  @keyframes subtleGlow { from{text-shadow:0 0 15px rgba(196,152,58,0.3)} to{text-shadow:0 0 40px rgba(196,152,58,0.6), 0 2px 8px rgba(44,32,22,0.08)} }
+
+  .divider-ornament { display:flex; align-items:center; justify-content:center; gap:12px; margin:18px 0; }
+  .divider-ornament .line { height:1px; width:70px; }
+  .divider-ornament .line.left { background:linear-gradient(to right, transparent, var(--sand-deep)); }
+  .divider-ornament .line.right { background:linear-gradient(to left, transparent, var(--sand-deep)); }
+  .divider-ornament .diamond { width:8px; height:8px; background:var(--terracotta); transform:rotate(45deg); box-shadow:0 0 8px rgba(181,101,74,0.4); }
+  .divider-ornament .diamond-sm { width:5px; height:5px; background:var(--warm-gold); transform:rotate(45deg); opacity:.6; }
+
+  .main-greeting { font-family:'Cormorant Garamond', serif; font-size:clamp(30px,5.8vw,66px); color:var(--ink); line-height:1.15; letter-spacing:1px; font-weight:300; }
+  .main-greeting span { color:var(--terracotta); display:block; font-style:italic; font-weight:400; }
+  .sub-greeting { font-family:'DM Sans', sans-serif; font-weight:300; font-size:clamp(11px,1.6vw,16px); color:var(--ink-soft); letter-spacing:4px; text-transform:uppercase; margin-top:12px; }
+
+  /* ── Card ── */
+  .card-container { z-index:4; width:90%; max-width:680px; margin:10px auto 40px; animation:fadeInUp 1.4s ease .3s both; }
+  .card { background:linear-gradient(145deg, rgba(26,107,60,0.25), rgba(10,26,15,0.6)); border:1px solid rgba(212,175,55,0.35); border-radius:18px; padding:38px; position:relative; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(212,175,55,0.1); }
+  .card::before { content:''; position:absolute; inset:0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath d='M25 3 L47 25 L25 47 L3 25 Z' fill='none' stroke='rgba(196,152,58,0.07)' stroke-width='1'/%3E%3C/svg%3E"); pointer-events:none; border-radius:18px; }
+  .card-corner { position:absolute; width:50px; height:50px; border-color:var(--gold); border-style:solid; opacity:.5; }
+  .card-corner.tl { top:10px; left:10px; border-width:2px 0 0 2px; }
+  .card-corner.tr { top:10px; right:10px; border-width:2px 2px 0 0; }
+  .card-corner.bl { bottom:10px; left:10px; border-width:0 0 2px 2px; }
+  .card-corner.br { bottom:10px; right:10px; border-width:0 2px 2px 0; }
+  .message-text { font-family:'Amiri', serif; font-size:clamp(15px,2.1vw,20px); color:var(--cream); line-height:2; text-align:center; }
+
+  /* ── Gallery ── */
+  .gallery-section { z-index:4; width:90%; max-width:780px; margin:0 auto 50px; animation:fadeInUp 1.5s ease .4s both; }
+  .gallery-title { font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--terracotta); font-size:18px; letter-spacing:2px; text-align:center; margin-bottom:20px; }
+  .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .photo-box { aspect-ratio:1/1; background:linear-gradient(145deg, rgba(26,107,60,0.2), rgba(10,26,15,0.5)); border:1px solid rgba(212,175,55,0.3); border-radius:14px; overflow:hidden; position:relative; cursor:pointer; transition:transform .3s, box-shadow .3s; }
+  .photo-box:hover { transform:scale(1.03) translateY(-4px); box-shadow:0 16px 40px rgba(212,175,55,0.2), 0 0 0 1px rgba(212,175,55,0.4); }
+  .photo-box.featured { grid-column:span 2; aspect-ratio:2/1; }
+  .photo-box img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+  .photo-box:hover img { transform:scale(1.05); }
+  .photo-fallback { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:8px; background:linear-gradient(135deg,rgba(26,107,60,0.15),rgba(10,26,15,0.4)); }
+  .photo-fallback .fi { font-size:28px; opacity:.5; }
+  .photo-fallback .fl { font-family:'Cormorant Garamond', serif; font-style:italic; color:rgba(212,175,55,0.5); font-size:11px; letter-spacing:1px; text-align:center; }
+
+  /* ── Lightbox ── */
+  .lightbox { display:none; position:fixed; inset:0; background:rgba(44,32,22,0.88); z-index:999; align-items:center; justify-content:center; }
+  .lightbox.active { display:flex; animation:fadeIn .3s ease; }
+  .lightbox img { max-width:90vw; max-height:85vh; border-radius:12px; border:1px solid var(--sand-deep); box-shadow:0 0 60px rgba(196,152,58,0.2); }
+  .lightbox-close { position:absolute; top:22px; right:26px; color:var(--sand); font-size:28px; cursor:pointer; opacity:.7; transition:opacity .2s; }
+  .lightbox-close:hover { opacity:1; }
+
+  /* ── Player ── */
+  .player { z-index:4; display:flex; align-items:center; gap:14px; background:rgba(26,107,60,0.2); border:1px solid rgba(212,175,55,0.25); border-radius:50px; padding:10px 22px; margin:0 auto 40px; width:fit-content; animation:fadeInUp 1.6s ease .6s both; box-shadow:0 4px 20px rgba(0,0,0,0.3); backdrop-filter:blur(8px); }
+  .play-btn { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg, var(--gold-dark), var(--gold)); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--deep); transition:all .3s; flex-shrink:0; }
+  .play-btn:hover { transform:scale(1.08); box-shadow:0 4px 16px rgba(212,175,55,0.5); }
+  .player-info { text-align:left; }
+  .player-title { font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--gold); font-size:13px; letter-spacing:1px; }
+  .player-subtitle { color:rgba(253,246,227,0.55); font-size:10px; letter-spacing:1px; }
+  .visualizer { display:flex; align-items:flex-end; gap:3px; height:22px; }
+  .vis-bar { width:3px; background:var(--gold); border-radius:2px; animation:visAnim .8s ease-in-out infinite alternate; opacity:.25; }
+  .vis-bar:nth-child(1){animation-delay:0s} .vis-bar:nth-child(2){animation-delay:.15s} .vis-bar:nth-child(3){animation-delay:.3s} .vis-bar:nth-child(4){animation-delay:.45s} .vis-bar:nth-child(5){animation-delay:.6s}
+  @keyframes visAnim { from{height:4px} to{height:20px} }
+  .vis-bar.playing { opacity:1; }
+
+  /* ════════════════════════════════
+     RAYA ENVELOPE — FIXED QR VERSION
+  ════════════════════════════════ */
+  .envelope-section { z-index:4; text-align:center; margin:0 auto 50px; animation:fadeInUp 1.5s ease .5s both; }
+  .envelope-title { font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--gold); font-size:18px; letter-spacing:2px; margin-bottom:24px; }
+
+  /* padding-top creates the space above envelope where QR card lives */
+  .envelope-wrapper { position:relative; width:220px; margin:0 auto 16px; cursor:pointer; padding-top:215px; }
+  .envelope { width:220px; height:150px; position:relative; }
+
+  /* ── QR card — always on top, revealed when open ── */
+  .env-money {
+    position:absolute; top:8px; left:50%;
+    transform:translateX(-50%) translateY(25px);
+    width:168px; height:198px;
+    background:linear-gradient(160deg, #FDF6E3 0%, #F5E07A 45%, #FDF6E3 100%);
+    border-radius:10px; border:2px solid rgba(160,130,13,0.5);
+    z-index:10;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.15);
+    opacity:0; pointer-events:none;
+    transition:opacity .5s .35s ease, transform .5s .35s ease;
+    overflow:hidden; flex-direction:column;
+  }
+  .env-money::before {
+    content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(160,130,13,0.05) 10px, rgba(160,130,13,0.05) 11px);
+    pointer-events:none;
+  }
+  .envelope-wrapper.open .env-money { opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+
+  .env-money-inner { text-align:center; position:relative; z-index:1; padding:10px; width:100%; }
+  .env-money-inner .qr-label-top { font-family:'Amiri', serif; font-size:10px; color:#7a5c0a; letter-spacing:1px; margin-bottom:7px; font-style:italic; display:block; }
+  .env-money-inner .qr-img { width:126px; height:126px; object-fit:contain; border-radius:6px; border:1px solid rgba(160,130,13,0.3); display:block; margin:0 auto; background:#fff; }
+  .env-money-inner .qr-placeholder { width:126px; height:126px; background:#fff; border-radius:6px; border:1px solid rgba(160,130,13,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto; flex-direction:column; gap:5px; }
+  .env-money-inner .qr-placeholder span { font-size:30px; }
+  .env-money-inner .qr-placeholder small { font-size:8px; color:#7a5c0a; letter-spacing:1px; text-align:center; padding:0 8px; line-height:1.5; }
+  .env-money-inner .qr-label-bot { font-family:'DM Sans', sans-serif; font-size:8px; color:#7a5c0a; letter-spacing:2px; margin-top:7px; text-transform:uppercase; display:block; }
+
+  /* ── Envelope body — dark emerald green ── */
+  .env-body {
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, #213C51 0%, #213C51 60%, #294d69 100%);
+    border-radius:8px 8px 14px 14px;
+    box-shadow:0 8px 35px rgba(10,46,26,0.6), inset 0 1px 0 rgba(212,175,55,0.2);
+    transition:box-shadow .4s; overflow:hidden;
+  }
+  .env-body::after { content:''; position:absolute; inset:5px; border-radius:5px 5px 11px 11px; border:1.5px solid rgba(212,175,55,0.35); pointer-events:none; }
+
+  /* Arabic "Eid Mubarak" + gold glow */
+  .env-pattern { position:absolute; inset:0; border-radius:8px 8px 14px 14px; overflow:hidden; }
+  .env-pattern::before { content:''; position:absolute; bottom:12px; left:50%; transform:translateX(-50%); width:120px; height:70px; background:radial-gradient(ellipse, rgba(212,175,55,0.2) 0%, transparent 70%); border-radius:50%; }
+  .env-pattern::after { content:'عِيدٌ مُبَارَك'; position:absolute; bottom:14px; left:50%; transform:translateX(-50%); font-family:'Amiri', serif; color:rgba(212,175,55,0.65); font-size:13px; letter-spacing:3px; white-space:nowrap; font-weight:bold; }
+
+  /* Gold corner stars */
+  .env-star { position:absolute; font-size:10px; color:rgba(212,175,55,0.5); line-height:1; }
+  .env-star.tl { top:10px; left:10px; }
+  .env-star.tr { top:10px; right:10px; }
+  .env-star.bl { bottom:10px; left:10px; }
+  .env-star.br { bottom:10px; right:10px; }
+
+  /* Crescent moon emblem */
+  .env-emblem { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); width:40px; height:40px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #F5E07A, #D4AF37 55%, #A0820D); box-shadow:0 0 16px rgba(212,175,55,0.6); display:flex; align-items:center; justify-content:center; font-size:20px; z-index:2; }
+
+  /* Flap — green matching body */
+  .env-flap { position:absolute; top:0; left:0; width:220px; height:100px; z-index:3; transform-origin:top center; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.4,0,.2,1); }
+  .env-flap-front { position:absolute; inset:0; overflow:hidden; }
+  .env-flap-front::before { content:''; position:absolute; top:0; left:0; width:0; height:0; border-left:110px solid transparent; border-right:110px solid transparent; border-top:90px solid #213C51; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.3)); }
+  .env-flap-front::after { content:''; position:absolute; top:0; left:0; width:0; height:0; border-left:110px solid transparent; border-right:110px solid transparent; border-top:90px solid rgba(212,175,55,0.07); }
+
+  /* Open state */
+  .envelope-wrapper.open .env-flap { transform:rotateX(180deg); }
+  .envelope-wrapper.open .env-body { box-shadow:0 20px 45px rgba(10,46,26,0.7); }
+
+  .env-hint { font-size:12px; color:var(--ink-soft); letter-spacing:2px; font-family:'DM Sans', sans-serif; }
+
+  /* Coin scatter */
+  .coin-scatter { position:fixed; pointer-events:none; z-index:5; font-size:20px; animation:coinFall 1.5s ease-out forwards; opacity:0; }
+  @keyframes coinFall { 0%{opacity:1;transform:translateY(-20px) rotate(0deg)} 100%{opacity:0;transform:translateY(150px) rotate(360deg)} }
+
+  /* ════════════════════════════════
+     WISHES / MESSAGES SECTION
+  ════════════════════════════════ */
+  .wishes-section { z-index:4; width:90%; max-width:680px; margin:0 auto 50px; animation:fadeInUp 1.5s ease .5s both; }
+  .wishes-title { font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--gold); font-size:22px; letter-spacing:1px; text-align:center; margin-bottom:6px; }
+  .wishes-subtitle { text-align:center; color:rgba(253,246,227,0.5); font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px; }
+
+  .wishes-form { background:linear-gradient(145deg, rgba(26,107,60,0.25), rgba(10,26,15,0.6)); border:1px solid rgba(212,175,55,0.35); border-radius:18px; padding:32px; box-shadow:0 4px 30px rgba(0,0,0,0.3); position:relative; overflow:hidden; backdrop-filter:blur(10px); }
+  .wishes-form::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, var(--emerald), var(--gold), var(--crimson)); }
+
+  .form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .form-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(253,246,227,0.55); font-family:'DM Sans', sans-serif; }
+  .form-input, .form-textarea {
+    padding:12px 16px;
+    background:rgba(10,26,15,0.5);
+    border:1px solid rgba(212,175,55,0.25);
+    border-radius:10px;
+    font-size:14px;
+    color:var(--cream);
+    font-family:'DM Sans', sans-serif;
+    transition:border-color .2s, box-shadow .2s;
+    outline:none;
+  }
+  .form-input:focus, .form-textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,0.12); }
+  .form-input::placeholder, .form-textarea::placeholder { color:rgba(253,246,227,0.3); }
+  .form-textarea { resize:vertical; min-height:120px; line-height:1.6; }
+
+  .send-btn { width:100%; padding:14px; background:linear-gradient(135deg, var(--gold-dark), var(--gold)); color:var(--deep); border:none; border-radius:12px; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; font-family:'DM Sans', sans-serif; font-weight:500; transition:all .3s; margin-top:8px; position:relative; overflow:hidden; }
+  .send-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(212,175,55,0.35); }
+  .send-btn::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); transform:translateX(-100%); transition:transform .6s; }
+  .send-btn:hover::after { transform:translateX(100%); }
+
+  /* Toast */
+  .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--emerald); color:var(--cream); border:1px solid rgba(212,175,55,0.3); padding:14px 28px; border-radius:50px; font-size:13px; letter-spacing:1px; z-index:9999; transition:transform .4s ease, opacity .4s; opacity:0; white-space:nowrap; }
+  .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+  /* ── Action buttons ── */
+  .actions-row { z-index:4; text-align:center; margin:0 auto 30px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; animation:fadeInUp 1.7s ease .8s both; }
+  .action-btn { display:inline-flex; align-items:center; gap:8px; background:transparent; border:1px solid rgba(212,175,55,0.35); color:var(--gold); padding:10px 22px; border-radius:50px; font-size:11px; letter-spacing:2px; cursor:pointer; transition:all .3s; font-family:'DM Sans', sans-serif; }
+  .action-btn:hover { background:rgba(212,175,55,0.12); transform:translateY(-2px); box-shadow:0 4px 16px rgba(212,175,55,0.15); }
+
+  /* ── Countdown ── */
+  .countdown-section { z-index:4; text-align:center; margin:0 auto 40px; animation:fadeInUp 1.5s ease .45s both; }
+  .countdown-label { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(253,246,227,0.5); margin-bottom:14px; }
+  .countdown-boxes { display:flex; gap:12px; justify-content:center; }
+  .cd-box { background:rgba(26,107,60,0.25); border:1px solid rgba(212,175,55,0.3); border-radius:12px; width:64px; padding:10px 6px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,0.2); backdrop-filter:blur(6px); }
+  .cd-num { font-family:'Cormorant Garamond', serif; font-size:28px; color:var(--gold); font-weight:600; line-height:1; }
+  .cd-lbl { font-size:9px; letter-spacing:2px; color:rgba(253,246,227,0.5); text-transform:uppercase; margin-top:4px; }
+
+  /* ── Footer ── */
+  .footer { z-index:4; text-align:center; padding:24px 20px 40px; color:var(--ink-soft); font-size:11px; letter-spacing:3px; font-family:'DM Sans', sans-serif; animation:fadeInUp 1.8s ease 1s both; }
+
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  @media (max-width:600px) {
+    .lanterns-row { gap:28px; }
+    .card { padding:22px 16px; }
+    .gallery-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+    .photo-box.featured { grid-column:span 2; }
+    .moon-orb { width:48px; height:48px; top:85px; }
+    .moon-orb::after { width:36px; height:36px; top:4px; right:6px; }
+    .countdown-boxes { gap:8px; }
+    .cd-box { width:55px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<div class="bg-texture"></div>
+<canvas id="petals-canvas"></canvas>
+<canvas id="fireworks-canvas"></canvas>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="lightboxImg" src="" alt="Photo">
+</div>
+
+<div class="toast" id="toast"></div>
+
+<audio id="bgMusic" loop>
+  <source src="audio/lagu-raya.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Bunting -->
+<svg class="bunting-svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
+  <path d="M0,10 Q150,65 300,20 Q450,65 600,15 Q750,65 900,20 Q1050,65 1200,10" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="1.5"/>
+  <g>
+    <polygon points="80,18 100,52 60,52"      fill="rgba(139,26,26,0.6)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="155,42 175,74 135,74"    fill="rgba(26,107,60,0.7)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="230,20 250,54 210,54"    fill="rgba(212,175,55,0.6)" stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="305,45 325,78 285,78"    fill="rgba(139,26,26,0.6)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="380,18 400,52 360,52"    fill="rgba(26,107,60,0.7)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="455,42 475,74 435,74"    fill="rgba(212,175,55,0.6)" stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="530,12 550,48 510,48"    fill="rgba(139,26,26,0.6)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="605,42 625,74 585,74"    fill="rgba(26,107,60,0.7)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="680,18 700,52 660,52"    fill="rgba(212,175,55,0.6)" stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="755,42 775,74 735,74"    fill="rgba(139,26,26,0.6)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="830,20 850,54 810,54"    fill="rgba(26,107,60,0.7)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="905,45 925,78 885,78"    fill="rgba(212,175,55,0.6)" stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="980,18 1000,52 960,52"   fill="rgba(139,26,26,0.6)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="1055,42 1075,74 1035,74" fill="rgba(26,107,60,0.7)"  stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+    <polygon points="1130,18 1150,52 1110,52" fill="rgba(212,175,55,0.6)" stroke="rgba(212,175,55,0.5)" stroke-width="1"/>
+  </g>
+</svg>
+
+<div class="lanterns-row" id="lanternsRow"></div>
+<div class="moon-orb"></div>
+
+<div class="float-deco" style="left:5%;top:32%;font-size:22px;animation-duration:4.2s;animation-delay:0s;opacity:.5;">🕌</div>
+<div class="float-deco" style="right:6%;top:44%;font-size:18px;animation-duration:5s;animation-delay:1s;opacity:.45;">✨</div>
+<div class="float-deco" style="left:8%;top:62%;font-size:20px;animation-duration:3.8s;animation-delay:2s;opacity:.4;">🌙</div>
+<div class="float-deco" style="right:4%;top:22%;font-size:16px;animation-duration:4.5s;animation-delay:.5s;opacity:.45;">⭐</div>
+<div class="float-deco" style="left:3%;top:78%;font-size:18px;animation-duration:5.5s;animation-delay:1.5s;opacity:.4;">🌿</div>
+<div class="float-deco" style="right:9%;top:68%;font-size:16px;animation-duration:4s;animation-delay:.8s;opacity:.4;">🌸</div>
+
+<svg class="mosque-silhouette" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+  <g fill="var(--emerald)">
+    <rect x="0" y="300" width="900" height="20"/>
+    <ellipse cx="450" cy="180" rx="120" ry="110"/>
+    <rect x="330" y="180" width="240" height="130"/>
+    <rect x="170" y="120" width="40" height="190"/>
+    <ellipse cx="190" cy="120" rx="20" ry="30"/>
+    <polygon points="190,70 175,120 205,120"/>
+    <rect x="690" y="120" width="40" height="190"/>
+    <ellipse cx="710" cy="120" rx="20" ry="30"/>
+    <polygon points="710,70 695,120 725,120"/>
+    <rect x="250" y="220" width="80" height="90"/>
+    <rect x="570" y="220" width="80" height="90"/>
+    <ellipse cx="290" cy="220" rx="40" ry="35"/>
+    <ellipse cx="610" cy="220" rx="40" ry="35"/>
+  </g>
+</svg>
+
+<div class="scene">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+    <div class="divider-ornament">
+      <div class="line left"></div>
+      <div class="diamond-sm diamond"></div>
+      <div class="diamond"></div>
+      <div class="diamond-sm diamond"></div>
+      <div class="line right"></div>
+    </div>
+    <div class="main-greeting">Selamat Hari Raya<span>Aidilfitri</span></div>
+    <div class="sub-greeting">Maaf Zahir &amp; Batin · 1447H</div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-section" id="countdownSection">
+    <div class="countdown-label">✦ Hari Raya Countdown ✦</div>
+    <div class="countdown-boxes">
+      <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Hari</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Jam</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Minit</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Saat</div></div>
+    </div>
+  </div>
+
+  <!-- GREETING CARD -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-corner tl"></div><div class="card-corner tr"></div>
+      <div class="card-corner bl"></div><div class="card-corner br"></div>
+      <p class="message-text">
+        Saya <strong style="color:var(--terracotta);">Wan NorBadilah</strong> ingin mengucapkan<br><br>
+        <strong style="color:var(--warm-gold);font-size:1.2em;"><b>Selamat Hari Raya Aidilfitri</b></strong><br>
+        Maaf Zahir & Batin🙏🏼<br>
+        <br>
+        Bulan Ramadan bulan yang mulia,<br>Disambut dengan hati yang gembira,<br>Kini syawal semakin menjelma, <br> Tangan ku hulurkan maaf dipinta. <br><br>
+        Satu syawal menjelang tiba, <br> Takbir bergema menggegarkan jiwa, <br> Sekiranya ada salah dan dosa, <br> Ampun dipinta di hari mulia. <br><br>
+        <em style="color:var(--rose);font-size:1.15em;">Kosong - kosong🫶🫶</em><br>
+        <br>
+        <em style="color:var(--ink-soft);font-size:.9em;">Maaf Zahir & Batin 🤲</em>
+      </p>
+    </div>
+  </div>
+
+  <!-- RAYA ENVELOPE — FIXED QR VERSION -->
+  <div class="envelope-section">
+    <div class="envelope-title">✦ Duit Raya ✦</div>
+
+    <div class="envelope-wrapper" id="envelopeWrapper" onclick="toggleEnvelope()">
+
+      <!-- QR card — hidden until envelope opens, sits above it -->
+      <div class="env-money">
+        <div class="env-money-inner">
+          <span class="qr-label-top">✦ Scan untuk duit raya ✦</span>
+          <!-- Save your QR code as images/qr.png -->
+          <img class="qr-img" src="images/qr.jpg" alt="QR Duit Raya"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="qr-placeholder" style="display:none">
+            <span>📲</span>
+            <small>Letak QR anda di images/qr.png</small>
+          </div>
+          <span class="qr-label-bot">Maaf kalau dah habis🙌</span>
+        </div>
+      </div>
+
+      <!-- The sampul -->
+      <div class="envelope">
+        <div class="env-body">
+          <div class="env-pattern"></div>
+          <div class="env-star tl">✦</div>
+          <div class="env-star tr">✦</div>
+          <div class="env-star bl">✦</div>
+          <div class="env-star br">✦</div>
+          <div class="env-emblem">☽</div>
+        </div>
+        <div class="env-flap">
+          <div class="env-flap-front"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="env-hint" id="envHint">✦ Klik sampul untuk buka ✦</div>
+  </div>
+
+  <!-- PHOTO GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-title">✦ Lot's of love ✦</div>
+    <div class="gallery-grid">
+      <div class="photo-box featured" onclick="openLightbox('images/raya1.jpg')">
+        <img src="images/raya1.jpg" alt="Gambar Utama" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-fallback" style="display:none"><div class="fi">📸</div><div class="fl">Gambar Utama</div></div>
+      </div>
+      <div class="photo-box" onclick="openLightbox('images/raya2.jpg')">
+        <img src="images/raya2.jpg" alt="Gambar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-fallback" style="display:none"><div class="fi">🌙</div><div class="fl">Gambar</div></div>
+      </div>
+      <div class="photo-box" onclick="openLightbox('images/raya3.jpg')">
+        <img src="images/raya3.jpg" alt="Gambar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-fallback" style="display:none"><div class="fi">✨</div><div class="fl">Gambar</div></div>
+      </div>
+      <div class="photo-box featured" onclick="openLightbox('images/raya4.jpg')">
+        <img src="images/raya4.jpg" alt="Gambar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-fallback" style="display:none"><div class="fi">📸</div><div class="fl">Gambar</div></div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--ink-soft);font-size:10px;letter-spacing:2px;margin-top:14px;font-style:italic;">✦ Ikhlas dari kami sekeluarga ✦</p>
+  </div>
+
+  <!-- MUSIC PLAYER -->
+  <div class="player">
+    <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶</button>
+    <div class="player-info">
+      <div class="player-title" id="songTitle">♪ Jodoh Lebaran</div>
+      <div class="player-subtitle" id="songSubtitle">Klik ▶ untuk bermain</div>
+    </div>
+    <div class="visualizer">
+      <div class="vis-bar" style="height:8px"></div>
+      <div class="vis-bar" style="height:14px"></div>
+      <div class="vis-bar" style="height:6px"></div>
+      <div class="vis-bar" style="height:18px"></div>
+      <div class="vis-bar" style="height:10px"></div>
+    </div>
+  </div>
+
+  <!-- WISHES FORM -->
+  <div class="wishes-section">
+    <div class="wishes-title">✦ Titipkan Ucapan Raya ✦</div>
+    <div class="wishes-form">
+      <div class="form-group">
+        <label class="form-label">Daripada</label>
+        <input class="form-input" id="wishName" type="text" placeholder="Nama awak..">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ucapan Raya</label>
+        <textarea class="form-textarea" id="wishMessage" placeholder="Tulis ucapan raya di sini...😍😍😍"></textarea>
+      </div>
+      <button class="send-btn" onclick="sendWish()">✦ Hantar ✦</button>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions-row">
+    <button class="action-btn" onclick="launchFireworks()">🎆 Bunga Api Woo!!</button>
+  </div>
+
+  <div class="footer">✦ Ramadan Kareem · Eid Mubarak · Selamat Hari Raya ✦<br><br>Made with 🤍</div>
+</div>
+
+<script>
+/* ── Cursor ── */
+const cursor=document.getElementById('cursor'),cursorDot=document.getElementById('cursorDot');
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';cursorDot.style.left=e.clientX+'px';cursorDot.style.top=e.clientY+'px';});
+
+/* ── Falling petals ── */
+const petalsCanvas=document.getElementById('petals-canvas');
+const pCtx=petalsCanvas.getContext('2d');
+let petals=[];
+function resizePetals(){petalsCanvas.width=window.innerWidth;petalsCanvas.height=window.innerHeight;}
+resizePetals();
+window.addEventListener('resize',resizePetals);
+const symbols=['✦','✿','❋','◆','❀','∗'];
+for(let i=0;i<55;i++){
+  petals.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,s:symbols[Math.floor(Math.random()*symbols.length)],size:Math.random()*12+7,speed:Math.random()*.6+.2,sway:Math.random()*1.5-.75,alpha:Math.random()*.35+.1,t:Math.random()*100,col:['rgba(212,175,55,','rgba(139,26,26,','rgba(26,107,60,'][Math.floor(Math.random()*3)]});
+}
+function drawPetals(){
+  pCtx.clearRect(0,0,petalsCanvas.width,petalsCanvas.height);
+  petals.forEach(p=>{
+    p.t+=.02; p.y+=p.speed; p.x+=Math.sin(p.t)*p.sway;
+    if(p.y>petalsCanvas.height+20){p.y=-20;p.x=Math.random()*petalsCanvas.width;}
+    pCtx.font=`${p.size}px serif`;
+    pCtx.fillStyle=p.col+p.alpha+')';
+    pCtx.fillText(p.s,p.x,p.y);
+  });
+  requestAnimationFrame(drawPetals);
+}
+drawPetals();
+
+/* ── Lanterns ── */
+const lCols=[
+  {bg:'linear-gradient(180deg,#c0392b,#8B1A1A)',glow:'rgba(192,57,43,0.5)'},
+  {bg:'linear-gradient(180deg,#D4AF37,#a0820d)',glow:'rgba(212,175,55,0.5)'},
+  {bg:'linear-gradient(180deg,#1a6b3c,#0d4025)',glow:'rgba(26,107,60,0.5)'},
+  {bg:'linear-gradient(180deg,#8B1A1A,#5a1010)',glow:'rgba(139,26,26,0.5)'},
+  {bg:'linear-gradient(180deg,#F5E07A,#D4AF37)',glow:'rgba(245,224,122,0.5)'},
+];
+const lr=document.getElementById('lanternsRow');
+[0,.4,.8,1.2,.2,.6,1.0].forEach((d,i)=>{
+  const c=lCols[i%lCols.length];
+  lr.innerHTML+=`<div class="lantern-wrap"><div class="lantern-string"></div><div class="lantern" style="background:${c.bg};--glow:${c.glow};animation-delay:${d}s"><div class="lantern-cap"></div><div class="lantern-bottom"></div><div class="lantern-tassel"></div></div></div>`;
+});
+
+/* ── Lightbox ── */
+function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('active');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
+
+/* ── Audio ── */
+const audio=document.getElementById('bgMusic');
+let isPlaying=false;
+function setUI(p){document.getElementById('playBtn').textContent=p?'⏸':'▶';document.querySelectorAll('.vis-bar').forEach(b=>p?b.classList.add('playing'):b.classList.remove('playing'));document.getElementById('songSubtitle').textContent=p?'Sedang bermain...':'Klik ▶ untuk bermain';}
+audio.play().then(()=>{isPlaying=true;setUI(true);}).catch(()=>{setUI(false);const unlock=()=>{audio.play().then(()=>{isPlaying=true;setUI(true);});document.removeEventListener('click',unlock);document.removeEventListener('touchstart',unlock);};document.addEventListener('click',unlock);document.addEventListener('touchstart',unlock);});
+function toggleMusic(){if(isPlaying){audio.pause();isPlaying=false;setUI(false);}else{audio.play();isPlaying=true;setUI(true);}}
+
+/* ── Countdown ── */
+const rayaDate=new Date('2026-03-21T00:00:00');
+function updateCountdown(){
+  const diff=rayaDate-new Date();
+  if(diff<=0){document.getElementById('countdownSection').innerHTML='<div class="countdown-label">🌙 Selamat Hari Raya Aidilfitri! 🌙</div>';return;}
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+/* ── Toast ── */
+function showToastMsg(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+/* ── Envelope ── */
+let envOpen=false;
+function toggleEnvelope(){
+  envOpen=!envOpen;
+  document.getElementById('envelopeWrapper').classList.toggle('open',envOpen);
+  document.getElementById('envHint').textContent=envOpen?'✦ Selamat Hari Raya! 🌙 ✦':'✦ Klik sampul untuk buka ✦';
+  if(envOpen){
+    scatterCoins();
+    setTimeout(()=>showToastMsg('🧧 Semoga dimurahkan rezeki. Selamat Hari Raya! 🌙'),500);
+  }
+}
+
+/* ── Coin scatter ── */
+function scatterCoins(){
+  const coins=['🪙','⭐','✨','💛','🌙','🌟'];
+  for(let i=0;i<18;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='coin-scatter';
+      el.textContent=coins[Math.floor(Math.random()*coins.length)];
+      el.style.left=Math.random()*window.innerWidth+'px';
+      el.style.top=Math.random()*window.innerHeight*.5+'px';
+      el.style.fontSize=(14+Math.random()*14)+'px';
+      el.style.animationDuration=(1+Math.random())+'s';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),2500);
+    },i*60);
+  }
+}
+
+/* ── Send wish (Web3Forms) ── */
+function sendWish(){
+  const name=document.getElementById('wishName').value.trim();
+  const message=document.getElementById('wishMessage').value.trim();
+  if(!name){alert('Sila masukkan nama kamu 🌙');return;}
+  if(!message){alert('Sila tulis ucapan raya kamu 🌙');return;}
+
+  const ACCESS_KEY='073b05b7-dd25-46dc-b57c-fca97630c996'; // ← Paste your Web3Forms key here
+  const subject=`[Ucapan Raya] daripada ${name}`;
+  const body=`Nama: ${name}\n\nUcapan:\n${message}\n\n---\nDihantar melalui kad raya digital Wan NorBadilah`;
+
+  if(ACCESS_KEY==='073b05b7-dd25-46dc-b57c-fca97630c996'){
+    window.location.href=`mailto:wanbadilah1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    showToastMsg('✦ Ucapan anda telah dihantar! Selamat Hari Raya! 🤍');
+    clearForm(); launchFireworks(); return;
+  }
+
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({access_key:ACCESS_KEY,subject,from_name:name,message:body})
+  }).then(r=>r.json()).then(data=>{
+    if(data.success){showToastMsg('✦ Ucapan anda telah dihantar! Terima kasih 🤍');clearForm();launchFireworks();scatterCoins();}
+    else{alert('Maaf, ada ralat. Cuba lagi.');}
+  }).catch(()=>{
+    window.location.href=`mailto:wanbadilah1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    showToastMsg('✦ Ucapan anda telah dihantar! 🤍');
+    clearForm();
+  });
+}
+
+function clearForm(){
+  document.getElementById('wishName').value='';
+  document.getElementById('wishMessage').value='';
+}
+
+/* ── Fireworks ── */
+const fwCanvas=document.getElementById('fireworks-canvas');
+const fCtx=fwCanvas.getContext('2d');
+fwCanvas.width=window.innerWidth; fwCanvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{fwCanvas.width=window.innerWidth;fwCanvas.height=window.innerHeight;});
+let fwParticles=[];
+function launchFireworks(){
+  for(let f=0;f<7;f++)setTimeout(()=>{
+    const x=Math.random()*fwCanvas.width, y=Math.random()*fwCanvas.height*.5+50;
+    const cols=['#D4AF37','#F5E07A','#ffffff','#2d9a5a','#c0392b','#fffde0'];
+    const col=cols[Math.floor(Math.random()*cols.length)];
+    for(let i=0;i<65;i++){
+      const a=(Math.PI*2/65)*i, sp=Math.random()*4+1.5;
+      fwParticles.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,color:col,r:Math.random()*2.2+.8,decay:Math.random()*.018+.01});
+    }
+  },f*260);
+}
+function animateFireworks(){
+  fCtx.clearRect(0,0,fwCanvas.width,fwCanvas.height);
+  fwParticles=fwParticles.filter(p=>p.alpha>.02);
+  fwParticles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.055;p.vx*=.985;p.alpha-=p.decay;fCtx.beginPath();fCtx.arc(p.x,p.y,p.r,0,Math.PI*2);fCtx.globalAlpha=p.alpha;fCtx.fillStyle=p.color;fCtx.fill();fCtx.globalAlpha=1;});
+  requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+setTimeout(launchFireworks,1800);
+setTimeout(launchFireworks,4200);
+</script>
+</body>
+</html>
